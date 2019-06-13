@@ -1,0 +1,7 @@
+@mixin container() {
+  @extend .container;
+}
+  
+@mixin full-width() {
+  width: 100%;
+}

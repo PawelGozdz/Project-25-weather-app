@@ -1,0 +1,31 @@
+// VARIABLES
+@import './variables';
+
+// MIXINS
+@import './mixin';
+
+// RESET
+@import './normalize';
+
+// NPM
+  // breakpoints
+  @import '~breakpoint-sass/stylesheets/breakpoint';
+  @import '~breakpoint-slicer/stylesheets/breakpoint-slicer';
+
+// TYPOGRAPHY
+@import './typography';
+
+
+// GENERAL
+// PAGE STYLES
+@import './layout';
+@import './base';
+
+// PARTIALS STYLES - specific web sections
+
+
+@import 'partials/flashes';
+@import 'partials/navigation';
+@import 'partials/map';
+@import 'partials/icons';
+

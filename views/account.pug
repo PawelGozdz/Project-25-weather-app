@@ -1,0 +1,16 @@
+extends layout
+
+include mixins/_userDeleteForm
+
+
+block content
+  h3= title
+  if (validationErrors !== undefined)
+    each er in validationErrors
+      p.error__validation= er.msg
+  if (errorMessage)
+    p.error__message= errorMessage
+
+  +userDelete()
+
+

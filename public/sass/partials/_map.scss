@@ -1,0 +1,126 @@
+.map {
+  
+  height: 100vh;
+  width: 100%;
+  background-color: transparent;
+  overflow: hidden;
+  position: relative;
+
+  // Container for google map positioned absolute, so the map
+  #map__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+
+  .content {
+    margin-top: 3.5rem;
+    padding: 1rem auto;
+    z-index: 100;
+    @include container();
+    // background-color: rgba($color-primary, 1);
+    
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+    
+    @include from(4) {
+      flex-direction: row;
+      text-align: left;
+    }
+
+    & > *:last-child {
+      flex: 1 0 100%;
+      background: transparent;
+    }
+
+    .autocomplete {
+      display: flex;
+      justify-content: center;
+
+      @include from(3) {
+        display: inline-block;
+        margin: 1rem auto;
+
+      }
+
+      input[name="geolocate"] {
+        padding: .5rem;
+        margin: .2rem auto;
+        color: $grey-dark;
+        background: $grey-light;
+        border: 2px solid $color-secondary;
+        box-shadow: 0 0 7px -3px $green;
+      }
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+
+    @include from(4) {
+      flex-direction: row;
+    }
+  }
+
+  &__favorites {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include from(2) {
+      flex-direction: row;
+      flex: 1;
+      justify-content: space-evenly;
+    }
+  }
+
+  &__popup {
+    min-width: 200px;
+  } 
+
+  .icon-heart {
+    position: absolute;
+    right: 2px;
+    bottom: 10px;
+    font-size: 1.3rem;
+    color: $green;
+    transition: all 0.2s;
+    cursor: pointer;
+    border-radius: 50%;
+
+
+    &:hover, &--active {
+      color: $color-secondary;
+    }
+
+    svg.favorite {
+      background-color: $color-secondary;
+    }
+  }
+
+  .map__alert {
+    position: absolute;
+    right: 0;
+    bottom: -70px;
+    text-align: center;
+    max-width: 150px;
+    height: auto;
+    padding: .5rem;
+    color: $white;
+    background: $color-primary;
+    transform: translateX(300px);
+    animation: .4s all ease-in-out;
+    z-index: 10000;
+
+    &.loggedin {
+      transform: translateX(0);
+    }
+  }
+}

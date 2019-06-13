@@ -1,0 +1,12 @@
+extends layout
+
+include mixins/_loginForm
+
+block content
+  .inner
+    if (validationErrors !== undefined)
+      each er in validationErrors
+        p.error__validation= er.msg
+    if (errorMessage)
+      p.error__message= errorMessage
+    +loginForm()

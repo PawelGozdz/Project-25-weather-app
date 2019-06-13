@@ -1,0 +1,12 @@
+.invalid {
+  border: 1px solid red;
+}
+
+.error {
+  &__validation,
+  &__message {
+    text-align: center;
+    margin: .5rem auto;
+    background: rgba(tomato, .4);
+  }
+}

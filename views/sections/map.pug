@@ -1,0 +1,10 @@
+section.map#map
+  #map__background
+  .content
+    if user
+      .map__favorites
+
+    .autocomplete
+      input.autocomplete__input(type="text" placeholder="Search for a place" name="geolocate")
+    .map__container
+      .map__alert You must be logged in!

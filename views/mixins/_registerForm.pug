@@ -1,0 +1,22 @@
+mixin registerForm()
+  form.form(action="/register" method="POST").form__register
+    h2 Register
+    label(for="email") Email
+    input(type="email" name="email" id="email"
+      class=(validationErrors.find(e => e.param === 'email') ? 'invalid' : '')
+      value=(oldInput.email))
+    label(for="name") Name
+    input(type="text" name="name" id="name"
+      class=(validationErrors.find(e => e.param === 'name') ? 'invalid' : '')
+      value=(oldInput.name))
+    label(for="password") Password
+    input(type="password" name="password" id="password"
+      class=(validationErrors.find(e => e.param === 'password') ? 'invalid' : '')
+      value=(oldInput.password))
+    label(for="password-confirm") Confirm Password
+    input(type="password" name="password-confirm" id="password-confirm"
+      class=(validationErrors.find(e => e.param === 'password-confirm') ? 'invalid' : '')
+      value=(oldInput.confirmPassword))
+    if user
+      input(type="hidden" name='userId' value=(user._id || ''))
+    input(type="submit" value="Register")

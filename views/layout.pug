@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title= `${title}`
+    link(rel='stylesheet', href='/dist/style.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+  body
+    block header
+      header.header
+        .content
+          nav.nav
+            ul.nav__list
+              each item in h.menu
+                li.nav__item
+                  a.nav__link(href=item.slug, class=(pagePath === '/' ? 'active' : ''))
+                    span #{item.title}
+              if user
+                li.nav__item.nav__item--user
+                  a.nav__link(href='/account', class=(pagePath === '/account' ? 'active' : '')) Account
+                li.nav__item.nav__item--user
+                  a.nav__link(href='/logout') Logout
+              else
+                li.nav__item.nav__item--user
+                  a.nav__link(href='/login' class=(pagePath === '/login' ? 'active' : '')) Login
+                li.nav__item.nav__item--user
+                  a.nav__link(href='/register' class=(pagePath === '/register' ? 'active' : '')) Register
+    .content
+      block content
+
+    block scripts
+      script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
+      script(src="/dist/App.bundle.js")

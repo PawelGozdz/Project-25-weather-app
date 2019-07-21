@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const PlaceSchema = require('./Place');
 mongoose.Promise = global.Promise;
 const validator = require('validator');
 const mongodbErrorHandler = require('mongoose-mongodb-errors');
@@ -12,7 +13,7 @@ const userSchema = new Schema({
     trim: true,
     // pierwsze jak ma być validowane, a drugie error msg
     validate: [validator.isEmail, 'Invalid Email Address'],
-    required: 'Please Supply an email address' 
+    required: 'Please Supply an email address'
   },
   name: {
     type: String,
@@ -25,6 +26,8 @@ const userSchema = new Schema({
   },
   resetToken: String,
   resetTokenExpiration: Date,
+  // favorites: [{ type: mongoose.Schema.ObjectId, ref: 'Place' }]
+  favorites: [PlaceSchema]
 });
 
 // It returns prettier error then ugly standard one

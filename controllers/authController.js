@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const Place = mongoose.model('Place');
+// const Place = mongoose.model('Place');
 
 const bcrypt = require('bcryptjs');
 
@@ -10,10 +10,10 @@ exports.getRegister = (req, res, next) => {
   res.render('register', {
     title: 'Register',
     pagePath: '/register',
-    oldInput: { 
-      email: "",
-      password: "",
-      confirmPassword: ""
+    oldInput: {
+      email: '',
+      password: '',
+      confirmPassword: ''
     },
     validationErrors: []
   });
@@ -29,7 +29,7 @@ exports.postRegister = async (req, res, next) => {
     return res.status(422).render('register', {
       path: '/register',
       pageTitle: 'Register',
-      oldInput: { 
+      oldInput: {
         email,
         name,
         password,
@@ -50,13 +50,12 @@ exports.postRegister = async (req, res, next) => {
 };
 
 exports.getLogin = (req, res, next) => {
-
   res.render('login', {
     pagePath: '/login',
     pageTitle: 'Login',
     oldInput: {
-      email: "",
-      password: ""
+      email: '',
+      password: ''
     },
     validationErrors: []
   });
@@ -79,7 +78,7 @@ exports.postLogin = async (req, res, next) => {
     });
   }
 
-  const user = await User.findOne({ email  });
+  const user = await User.findOne({ email });
 
   if (!user) {
     return res.status(422).render('login', {
@@ -125,15 +124,15 @@ exports.getAccount = (req, res, next) => {
     pagePath: '/account',
     pageTitle: 'Acount',
     oldInput: {
-      email: "",
-      password: ""
+      email: '',
+      password: ''
     },
     validationErrors: []
   });
 };
 
 exports.postDeleteUser = async (req, res, next) => {
-  if (!req.session.user) throw new Error('User doesn\' exist!');
+  if (!req.session.user) throw new Error("User doesn' exist!");
 
   const { email, password, userId } = req.body;
   const errors = validationResult(req);
@@ -142,19 +141,18 @@ exports.postDeleteUser = async (req, res, next) => {
     return res.status(422).render('account', {
       path: '/account',
       pageTitle: 'Acount',
-      oldInput: { 
+      oldInput: {
         email,
         password
       },
       validationErrors: errors.array()
     });
   }
-  
-  const user = await User.findById({ _id: userId  });
+
+  const user = await User.findById({ _id: userId });
   if (userId === req.session.user._id && req.session.user.email === email) {
-    const favoritePlaces = await Place.deleteMany({ author: req.session.user._id  }, (err, data) => {
-      if(err) throw new Error('These records cannot be deleted');
-    });
+    const favPlaces = await User.findOne({ email });
+    favPlaces.favorites.remove();
     user.remove();
     return req.session.destroy(err => {
       res.status(200).redirect('/');
@@ -165,7 +163,7 @@ exports.postDeleteUser = async (req, res, next) => {
     path: '/account',
     pageTitle: 'Acount',
     errorMessage: 'Make sure that you confirm your details',
-    oldInput: { 
+    oldInput: {
       email,
       password
     },

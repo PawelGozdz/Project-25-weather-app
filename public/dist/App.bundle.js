@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 363);
+/******/ 	return __webpack_require__(__webpack_require__.s = 362);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -5087,16 +5087,11 @@ define(String.prototype, "padRight", "".padEnd);
 "use strict";
 
 
-__webpack_require__(362);
+__webpack_require__(361);
 
-var _map = __webpack_require__(361);
+var _map = __webpack_require__(360);
 
 (0, _map.makeMap)(document.querySelector('#map__background'));
-
-// .map__favorites div exists only if User is logged in
-if (document.querySelector('.map__favorites')) {
-  (0, _map.buildInitialListOfFavorites)();
-}
 
 /***/ }),
 /* 140 */
@@ -11678,8 +11673,7 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 360 */,
-/* 361 */
+/* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11688,140 +11682,99 @@ module.exports = function (module) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.buildInitialListOfFavorites = undefined;
 
-var fetchInitialListOfFavorites = function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-    var _this = this;
-
-    var fetchedPlaces, favoritePlaces, getWeather;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+var buildFavoritesTopbar = function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var places;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context.prev = _context.next) {
           case 0:
-            fetchedPlaces = [];
-            _context2.next = 3;
-            return _axios2.default.get('/api/places');
+            _context.next = 2;
+            return fetchFavorites();
 
-          case 3:
-            favoritePlaces = _context2.sent;
-            _context2.next = 6;
-            return favoritePlaces.data.map(function () {
-              var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(pl) {
-                var weather;
-                return regeneratorRuntime.wrap(function _callee$(_context) {
-                  while (1) {
-                    switch (_context.prev = _context.next) {
-                      case 0:
-                        _context.next = 2;
-                        return _axios2.default.get('/api/place?lat=' + pl.location.coordinates[0] + '&lng=' + pl.location.coordinates[1]);
+          case 2:
+            places = _context.sent;
 
-                      case 2:
-                        weather = _context.sent;
+            // const plcss = places.reduce((acc, val, i, arr) => {
+            //   return acc;
+            // }, []);
+            // const ready = await Promise.all(
+            //   places.map(pl =>)
+            // );
+            console.log(places.data.favorites);
 
-                        pl.icon = weather.data.weather[0].icon;
-                        pl.main = weather.data.weather[0].main;
-                        pl.temp = weather.data.main.temp;
-                        fetchedPlaces.push(pl);
-
-                      case 7:
-                      case 'end':
-                        return _context.stop();
-                    }
-                  }
-                }, _callee, _this);
-              }));
-
-              return function (_x) {
-                return _ref2.apply(this, arguments);
-              };
-            }());
-
-          case 6:
-            getWeather = _context2.sent;
-            return _context2.abrupt('return', fetchedPlaces);
-
-          case 8:
+          case 4:
           case 'end':
-            return _context2.stop();
+            return _context.stop();
         }
       }
-    }, _callee2, this);
+    }, _callee, this);
   }));
 
-  return function fetchInitialListOfFavorites() {
+  return function buildFavoritesTopbar() {
     return _ref.apply(this, arguments);
   };
 }();
 
-var buildInitialListOfFavorites = exports.buildInitialListOfFavorites = function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-    var favorites, favoriteToDisplay, html;
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            // if no .map__favorites, it means that no index page or no user logged in
-            favorites = document.querySelector('.map__favorites') || [];
+// async function fetchInitialListOfFavorites() {
+//   let fetchedPlaces = [];
 
-            if (!(favorites === undefined)) {
-              _context3.next = 3;
-              break;
-            }
+//   const favoritePlaces = await axios.get(`/api/places`);
+//   const getWeather = await favoritePlaces.data.map(async pl => {
+//     const weather = await axios.get(
+//       `/api/place?lat=${pl.location.coordinates[0]}&lng=${
+//         pl.location.coordinates[1]
+//       }`
+//     );
+//     pl.icon = weather.data.weather[0].icon;
+//     pl.main = weather.data.weather[0].main;
+//     pl.temp = weather.data.main.temp;
+//     fetchedPlaces.push(pl);
+//   });
 
-            return _context3.abrupt('return');
+//   return fetchedPlaces;
+// }
 
-          case 3:
-            _context3.next = 5;
-            return fetchInitialListOfFavorites();
+// export async function buildInitialListOfFavorites() {
+//   // if no .map__favorites, it means that no index page or no user logged in
+//   const favorites = document.querySelector('.map__favorites') || [];
 
-          case 5:
-            _context3.t0 = _context3.sent;
+//   if (favorites === undefined) return;
 
-            if (_context3.t0) {
-              _context3.next = 8;
-              break;
-            }
+//   // Couldn't solve issue with data coming back. It has, but as an empty array, however a few miliseconds later, that array is clickable and the data is there.
 
-            _context3.t0 = [];
+//   const favoriteToDisplay = (await fetchInitialListOfFavorites()) || [];
+//   let html = '';
+//   console.log(
+//     '--> This data must be printed as user favorites',
+//     favoriteToDisplay
+//   );
 
-          case 8:
-            favoriteToDisplay = _context3.t0;
-            html = '';
+//   // if favoriteToDisplay.length === 0, you can't see the data coming back
+//   if (favoriteToDisplay.length !== 0) {
+//     console.log('pusta', favoriteToDisplay.length);
+//     favorites.style.display = 'none';
+//     return;
+//   }
 
-            console.log('--> This data must be printed as user favorites', favoriteToDisplay);
-
-            // if favoriteToDisplay.length === 0, you can't see the data coming back
-
-            if (!(favoriteToDisplay.length !== 0)) {
-              _context3.next = 15;
-              break;
-            }
-
-            console.log('pusta', favoriteToDisplay.length);
-            favorites.style.display = 'none';
-            return _context3.abrupt('return');
-
-          case 15:
-
-            // This should prepare html for injection to .map__favourits section
-            favoriteToDisplay.forEach(function (place) {
-              html += '\n        <article class=\'map__favorite\'>\n          <h3>' + place.data.name + '</h3>\n          <img src=\'http://openweathermap.org/img/w/' + place.data.icon + '.png\' class=\'map__img\' alt=\'' + place.data.name + '\' title=\'' + place.data.name + '\'>\n          <span class=\'map__temp\'>' + (place.data.temp - 273.15) + '</span>\n          <i class=\'icon-heart map__heart\'></i>\n        </article>\n      ';
-            });
-            favorites.innerHTML = html;
-
-          case 17:
-          case 'end':
-            return _context3.stop();
-        }
-      }
-    }, _callee3, this);
-  }));
-
-  return function buildInitialListOfFavorites() {
-    return _ref3.apply(this, arguments);
-  };
-}();
+//   // This should prepare html for injection to .map__favourits section
+//   favoriteToDisplay.forEach(place => {
+//     html += `
+//         <article class='map__favorite'>
+//           <h3>${place.data.name}</h3>
+//           <img src='http://openweathermap.org/img/w/${
+//             place.data.icon
+//           }.png' class='map__img' alt='${place.data.name}' title='${
+//       place.data.name
+//     }'>
+//           <span class='map__temp'>${place.data.temp - 273.15}</span>
+//           <i class='icon-heart map__heart'></i>
+//         </article>
+//       `;
+//   });
+//   favorites.innerHTML = html;
+// }
 
 exports.makeMap = makeMap;
 
@@ -11835,7 +11788,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 // Default map location
 var mapOptions = {
-  center: { lat: 51.076390, lng: 17.047810 },
+  center: { lat: 51.07639, lng: 17.04781 },
   zoom: 6
 };
 
@@ -11843,7 +11796,7 @@ var mapOptions = {
 function catchHeartIcons() {
   var icons = document.querySelectorAll('.map__heart');
   return icons;
-};
+}
 
 function addListenerToInfoWindow(data) {
   var markers = catchHeartIcons();
@@ -11859,14 +11812,14 @@ function toggleFavorite(place) {
   place.target.style.display = 'none';
 
   // Prevent clicking before data comes back
-  _axios2.default.post('/api/place/favorite', { lat: place.data.coord.lat,
+  _axios2.default.post('/api/favorites/' + place.data.name + '/place', {
+    lat: place.data.coord.lat,
     lng: place.data.coord.lon,
-    name: place.data.name,
     website: place.data.website,
     icon: place.data.weather[0].icon
   }).then(function (returnedData) {
     if (!returnedData) {
-      alert('Cant\'t fetch data!');
+      alert("Cant't fetch data!");
       return;
     }
 
@@ -11882,8 +11835,19 @@ function toggleFavorite(place) {
       }, 1500);
     }
 
-    buildInitialListOfFavorites();
+    // buildInitialListOfFavorites();
+    buildFavoritesTopbar();
+  }).catch(function (err) {
+    return console.log(err);
   });
+}
+
+function fetchFavorites() {
+  return _axios2.default.get('/api/places');
+}
+
+function getCurrentWeather(lat, lng) {
+  return _axios2.default.get('/api/place?lat=' + lat + '&lng=' + lng);
 }
 
 function loadPlaces(map, place) {
@@ -11893,7 +11857,7 @@ function loadPlaces(map, place) {
 
   _axios2.default.get('/api/place?lat=' + lat + '&lng=' + lng).then(function (res) {
     if (!res) {
-      alert('Cant\'t fetch data!');
+      alert("Cant't fetch data!");
       return;
     }
 
@@ -11911,16 +11875,16 @@ function loadPlaces(map, place) {
     marker.place.data.website = place.website;
 
     marker.addListener('click', function () {
-      var _this2 = this;
+      var _this = this;
 
-      var html = '\n          <article class="map__popup">\n            <h3 class=\'map__place\'>' + this.place.data.name.substring(0, 30) + '</h3>\n            <img src=\'http://openweathermap.org/img/w/' + this.place.data.weather[0].icon + '.png\' class=\'map__img\' alt=\'' + this.place.data.weather[0].description + '\' title=\'' + this.place.data.weather[0].description + '\'>\n            <p>' + this.place.data.weather[0].main + '</p>\n            <p>' + this.place.data.weather[0].description + '</p>\n            <p>' + Math.round(this.place.data.main.temp - 273.15) + ' &#8451;</p>\n            <i class=\'icon-heart map__heart\'></i>\n            \n          </article>\n        ';
+      var html = '\n          <article class="map__popup">\n            <h3 class=\'map__place\'>' + this.place.data.name.substring(0, 30) + '</h3>\n            <img src=\'http://openweathermap.org/img/w/' + this.place.data.weather[0].icon + '.png\' class=\'map__img\' alt=\'' + this.place.data.weather[0].description + '\' title=\'' + this.place.data.weather[0].description + '\'>\n            <p>' + this.place.data.weather[0].main + '</p>\n            <p>' + this.place.data.weather[0].description + '</p>\n            <p>' + Math.round(this.place.data.main.temp - 273.15) + ' &#8451;</p>\n            <i class=\'icon-heart map__heart\'></i>\n          </article>\n        ';
 
       infoWindow.setContent(html);
       infoWindow.open(map, marker);
 
       // 'domready' event make icon possible to select
       var mapReadyEvent = new google.maps.event.addListener(infoWindow, 'domready', function (e) {
-        addListenerToInfoWindow(_this2.place.data);
+        addListenerToInfoWindow(_this.place.data);
       });
     });
 
@@ -11940,16 +11904,16 @@ function makeMap(mapDiv) {
     var place = autocomplete.getPlace();
     loadPlaces(map, place);
   });
-};
+}
 
 /***/ }),
-/* 362 */
+/* 361 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 363 */
+/* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(138);

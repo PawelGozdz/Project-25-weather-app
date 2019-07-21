@@ -1,0 +1,7 @@
+mixin favoriteTopbar(place)
+  article.map__favorite
+    img(src=`http://openweathermap.org/img/w/${place.icon}.png`, alt=`${place.name}`)
+    span 28 &#8451;
+    //- i.icon-heart.map__heart
+    
+    p= place.name

@@ -1,8 +1,15 @@
+include ../mixins/_favoriteTopbar
+
 section.map#map
   #map__background
   .content
+    //- pre= h.dump(user)
     if user
       .map__favorites
+        //- //- pre= h.dump(user)
+        //- each place in user.favorites
+        //-   //- p= place
+        //-   +favoriteTopbar(place)
 
     .autocomplete
       input.autocomplete__input(type="text" placeholder="Search for a place" name="geolocate")

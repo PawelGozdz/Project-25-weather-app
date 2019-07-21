@@ -16,10 +16,12 @@ const placeSchema = new mongoose.Schema({
       type: String,
       default: 'Point'
     },
-    coordinates: [{
-      type: Number,
-      required: 'You must supply coordinates!'
-    }],
+    coordinates: [
+      {
+        type: Number,
+        required: 'You must supply coordinates!'
+      }
+    ]
   },
   icon: String,
   author: {
@@ -38,4 +40,5 @@ placeSchema.index({
   name: 'text'
 });
 
-module.exports = mongoose.model('Place', placeSchema);
+module.exports = placeSchema;
+// module.exports = mongoose.model('Place', placeSchema);

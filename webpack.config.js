@@ -6,10 +6,12 @@ const autoprefixer = require('autoprefixer');
 // This is our JavaScript rule that specifies what to do with .js files
 const javascript = {
   test: /\.(js)$/, // anything that ends in `.js`
-  use: [{
-    loader: 'babel-loader',
-    options: { presets: ['env'] } // env it a recommended setting
-  }],
+  use: [
+    {
+      loader: 'babel-loader',
+      options: { presets: ['env'] } // env it a recommended setting
+    }
+  ]
 };
 
 // postCSS gets fed into the next loader
@@ -17,18 +19,25 @@ const javascript = {
 const postcss = {
   loader: 'postcss-loader',
   options: {
-    plugins() { return [autoprefixer({ browsers: 'last 3 versions' })]; }
+    plugins() {
+      return [autoprefixer({ browsers: 'last 3 versions' })];
+    }
   }
 };
 
 // this is our sass/css loader
 const styles = {
   test: /\.(scss)$/,
-  use: ExtractTextPlugin.extract(['css-loader?sourceMap', postcss, 'sass-loader?sourceMap'])
+  use: ExtractTextPlugin.extract([
+    'css-loader?sourceMap',
+    postcss,
+    'sass-loader?sourceMap'
+  ])
 };
 
 // Compress our JS
-const uglify = new webpack.optimize.UglifyJsPlugin({ // eslint-disable-line
+const uglify = new webpack.optimize.UglifyJsPlugin({
+  // eslint-disable-line
   compress: { warnings: false }
 });
 
@@ -52,7 +61,7 @@ const config = {
   // plugins: [uglify]
   plugins: [
     // output our css to a separate file
-    new ExtractTextPlugin('style.css'),
+    new ExtractTextPlugin('style.css')
   ]
 };
 

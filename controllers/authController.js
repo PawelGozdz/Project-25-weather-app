@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-// const Place = mongoose.model('Place');
 
 const bcrypt = require('bcryptjs');
 

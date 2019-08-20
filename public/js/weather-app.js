@@ -1,5 +1,13 @@
 import '../sass/style.scss';
 
-import { makeMap, buildInitialListOfFavorites } from './modules/map';
+import { makeMap, buildFavouritesTopbar } from './map/map';
 
 makeMap(document.querySelector('#map__background'));
+
+if (document.querySelector('.map__favourites')) {
+  buildFavouritesTopbar();
+  // Refresh
+  setInterval(() => {
+    buildFavouritesTopbar();
+  }, 360000);
+}

@@ -26,8 +26,8 @@ const userSchema = new Schema({
   },
   resetToken: String,
   resetTokenExpiration: Date,
-  // favorites: [{ type: mongoose.Schema.ObjectId, ref: 'Place' }]
-  favorites: [PlaceSchema]
+  // favourites: [{ type: mongoose.Schema.ObjectId, ref: 'Place' }]
+  favourites: [PlaceSchema]
 });
 
 // It returns prettier error then ugly standard one

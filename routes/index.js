@@ -86,10 +86,14 @@ router.post(
  */
 
 router.get('/api/place', catchErrors(weatherController.getSearchPlace));
-router.get('/api/places', catchErrors(weatherController.getAllUserPlaces));
+router.get(
+  '/api/places',
+  isAuth,
+  catchErrors(weatherController.getAllUserPlaces)
+);
 router.post(
-  '/api/favorites/:name/place',
-  catchErrors(weatherController.postFavoritePlace)
+  '/api/favourites/:name/place',
+  catchErrors(weatherController.postFavouritePlace)
 );
 
 module.exports = router;

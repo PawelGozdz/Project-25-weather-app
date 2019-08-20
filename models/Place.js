@@ -23,17 +23,11 @@ const placeSchema = new mongoose.Schema({
       }
     ]
   },
-  icon: String,
   author: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
     required: 'Supply an author'
-  },
-  favorite: {
-    type: Boolean,
-    default: false
-  },
-  website: String
+  }
 });
 
 placeSchema.index({

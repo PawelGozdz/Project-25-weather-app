@@ -615,8 +615,6 @@ picture {
     text-align: center; }
     @media (min-width: 65em) {
       .map .content {
-        -ms-flex-direction: row;
-            flex-direction: row;
         text-align: left; } }
     .map .content > *:last-child {
       -ms-flex: 1 0 100%;
@@ -647,28 +645,39 @@ picture {
       .map__container {
         -ms-flex-direction: row;
             flex-direction: row; } }
-  .map__favorites {
+  .map__favourites {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap; }
+        flex-wrap: wrap;
+    border: 2px solid rgba(255, 196, 14, 0.8); }
     @media (min-width: 36em) {
-      .map__favorites {
+      .map__favourites {
         -ms-flex-direction: row;
             flex-direction: row;
         -ms-flex: 1;
-            flex: 1;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly; } }
-  .map__favorite {
-    background: rgba(255, 196, 14, 0.8);
-    padding: 0.5rem; }
+            flex: 1; } }
+  .map__favourite {
+    display: -ms-flexbox;
+    display: flex;
+    background: #fff;
+    position: relative;
+    padding: 0.5rem;
+    margin: 0.5rem; }
+    .map__favourite:not(:last-child) {
+      margin-right: 0.5rem; }
+  .map__temp {
+    font-weight: bold; }
+  .map__img {
+    display: inline-block;
+    max-width: 3rem; }
   .map__popup {
     min-width: 200px; }
   .map .icon-heart {
+    display: inline-block;
     position: absolute;
     right: 2px;
-    bottom: 10px;
+    top: 2px;
     font-size: 1.3rem;
     color: #93FF00;
     transition: all 0.2s;
@@ -676,8 +685,10 @@ picture {
     border-radius: 50%; }
     .map .icon-heart:hover, .map .icon-heart--active {
       color: #E50714; }
-    .map .icon-heart svg.favorite {
+    .map .icon-heart svg.favourite {
       background-color: #E50714; }
+  .map__popup .icon-heart {
+    top: 80%; }
   .map .map__alert {
     position: absolute;
     right: 0;
